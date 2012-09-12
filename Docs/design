@@ -1,0 +1,47 @@
+
+Requirement
+------------
+
+Need to create a music streaming platform with no planned downtime. This includes
+needed to fix bugs, add new features, and error scenarios.
+
+
+Use Erlang Features
+--------------------
+
+Hot code loading:
+		
+	+ the system will develop a bug that needs to be fixed.
+	  Using hot code loading, the bug will be fixed without any
+	  downtime. All new requests will get the updated code,
+	  whilst existing requests will not be interrupted and continue
+	  to use the old code
+
+
+Process Monitoring:
+
+	+ When an error condition arises a system process will catch it
+	  and ensure that the request will continue to be fulfilled by
+	  a new process. This should demonstrate minimum, if any, disruption
+	  to the client
+
+
+Performance
+
+	+ TBA
+
+
+Scalability
+
+	+ TBA
+
+
+Demo
+----
+
++ Demo the use of all Erlang features
+
++ Show the equivalent in .NET
+	- is it possible to maintain the same level of uptime?
+	- what would it take to maintain same level of uptime?
+	- will existing requests be aborted or quality degraded
