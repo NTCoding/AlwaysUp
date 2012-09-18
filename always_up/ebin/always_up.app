@@ -1,0 +1,9 @@
+{application,always_up,
+             [{description,"always_up"},
+              {vsn,"1"},
+              {modules,[always_up,always_up_app,always_up_resource,
+                        always_up_sup]},
+              {registered,[]},
+              {applications,[kernel,stdlib,inets,crypto,mochiweb,webmachine]},
+              {mod,{always_up_app,[]}},
+              {env,[]}]}.
