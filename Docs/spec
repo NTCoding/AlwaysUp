@@ -45,3 +45,37 @@ Demo
 	- is it possible to maintain the same level of uptime?
 	- what would it take to maintain same level of uptime?
 	- will existing requests be aborted or quality degraded
+
++ How every process is a server - not 1 server with multiple threads
+
++ OTP libararies
+
+
+Plan 
+-----
+
+1. Streaming service that streams 1 song from file stream
+
+2. Handles errors with minimal disruption to users
+
+3. Implement a bug that can be fixed by hot code loading
+	+ Gets halfway through a song and skips back to the start
+
+4. Implement hot code loading that can be used to fix the bug
+
+5. Use a cluster of nodes - 3 or 4 with a system process on another node
+	+ look at patterns in Erlang book
+
+5. Refactor to use the OTP libraries (but on a separate branch?)
+
+
+Links 
+-----
+http://stackoverflow.com/questions/7307634/how-do-you-design-the-architecture-of-an-erlang-otp-based-distributed-fault-tole
+
+
+
+
+
+
+
