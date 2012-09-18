@@ -1,0 +1,2 @@
+%%-*- mode: erlang -*-
+{[], always_up_resource, []}.
