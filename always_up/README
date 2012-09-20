@@ -1,35 +1,14 @@
-Project Skeleton for the always_up app.
+A music streaming service that serves a random playlist to multiple clients.
 
-You should find in this directory:
+To run on ubuntu
+-----------------
 
-README : this file
-Makefile : simple make commands
-rebar : the Rebar build tool for Erlang applications
-rebar.config : configuration for Rebar
-start.sh : simple startup script for running always_up
-/ebin
-  /always_up.app : the Erlang app specification
-/src
-  /always_up_app.erl : base module for the Erlang application
-  /always_up_sup.erl : OTP supervisor for the application
-  /always_up_resource.erl : a simple example Webmachine resource
-/priv
-  /dispatch.conf : the Webmachine URL-dispatching table
-  /www : a convenient place to put your static web content
+1. clone repository
 
-You probably want to do one of a couple of things at this point:
+2. add a selection of your favourite songs to the always_up/songs folder in mp3 format
 
-0. Build the skeleton application:
-   $ make
-   - or -
-   $ ./rebar compile
+3. run make from terminal
 
-1. Start up the skeleton application:
-   $ ./start.sh
+4. run ./start.sh from terminal
 
-2. Change the basic application:
-   edit src/always_up_resource.erl
-
-3. Add some new resources:
-   edit src/YOUR_NEW_RESOURCE.erl
-   edit priv/dispatch.conf
+5. browse to localhost:8000/playlist in chrome and it will stream your tunes in a random order
