@@ -28,10 +28,7 @@ loop({Playlist, Connections, LastPublishTime}) ->
 
 		{publish} ->
 			publish_song(Playlist, Connections),
-			[CurrentSong|QueuedSongs] = Playlist,
-			NewPlaylist = Playlist, %% append another song here
-			io:format("New playlist: ~p~n", [NewPlaylist]),
-			loop({NewPlaylist, Connections, now()});
+			loop({Playlist, Connections, now()});
 
 		{Pid, connections} ->
 			Pid ! {ok, Connections},
@@ -56,42 +53,25 @@ publish_song(Playlist, []) ->
 	io:format("No clients connected. Publish aborted~n");
 
 publish_song(Playlist, Connections) ->
-	[Filename|Tail] = Playlist,
-	io:format("About to publish: ~p~n", [Filename]),
-	{ok, Mp3Data} = file:read_file("songs/" ++ Filename),
-	lists:foreach(fun(C) -> C ! {chunk, Mp3Data} end, Connections).
+	Filename = lists:nth(1, Playlist),
+	io:format("Filename:~p~n", [Filename]),
+	lists:foreach(fun(C) -> send_song(C, Filename) end, Connections).
 
-
-stream_blah(Pid) ->
-	case is_connected(Pid) of
-		false -> playlist ! {connect, Pid};
-		true -> []
-	end,
-	receive
-		{chunk, Mp3Data} -> []					
-	end,
-	%% Might need to remove Pid from connection here?
-	spawn(fun() -> io:format("Streaming chunk to client:~p~n", [Mp3Data]) end), 	
-	Mp3Data.
 
 stream(Pid) ->
 	case is_connected(Pid) of
 		false -> playlist ! {connect, Pid};
 		true -> []
 	end,
-	playlist ! {Pid, connections},
-	receive
-		{ok, Connections} -> []
-	end,
-	lists:foreach(fun(C) -> send_song(C) end, Connections),
+	playlist ! {publish},
 	receive
 		{song, Binary} -> []
 	end,
 	Binary.
 
 
-send_song(Pid) ->
-	{ok, Mp3Data} = file:read_file("songs/song2.mp3"),
+send_song(Pid, Filename) ->
+	{ok, Mp3Data} = file:read_file("songs/" ++ Filename),
 	Pid ! {song, Mp3Data}.
 
 is_connected(Pid) ->
