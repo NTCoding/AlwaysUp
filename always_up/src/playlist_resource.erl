@@ -4,6 +4,7 @@
 
 -include_lib("webmachine/include/webmachine.hrl").
 
+
 init([]) ->
 	{ok, undefined}.
 
@@ -13,9 +14,21 @@ content_types_provided(ReqData, State) ->
 
 
 to_mp3(ReqData, State) ->
-	File = "song.mp3",
-	{ok, Content} = file:read_file(File),
+	File = get_random_song_file(),
+	{ok, Content} = file:read_file("songs/" ++ File),
 	{Content, ReqData, State}.
+
+
+get_random_song_file() ->
+	{ok, Filenames} = file:list_dir("songs"),
+	select_randomly(Filenames).
+
+
+select_randomly(Filenames) ->
+	random:seed(now()),
+	Index = random:uniform(length(Filenames)),
+	lists:nth(Index, Filenames).
+		
 
 	
 
