@@ -14,20 +14,8 @@ content_types_provided(ReqData, State) ->
 
 
 to_mp3(ReqData, State) ->
-	File = get_random_song_file(),
-	{ok, Content} = file:read_file("songs/" ++ File),
+	Content = playlist_provider:stream(self()),
 	{Content, ReqData, State}.
-
-
-get_random_song_file() ->
-	{ok, Filenames} = file:list_dir("songs"),
-	select_randomly(Filenames).
-
-
-select_randomly(Filenames) ->
-	random:seed(now()),
-	Index = random:uniform(length(Filenames)),
-	lists:nth(Index, Filenames).
 		
 
 	

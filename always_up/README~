@@ -1,0 +1,14 @@
+A music streaming service that serves a random playlist to multiple clients.
+
+To run on ubuntu
+-----------------
+
+1. clone repository
+
+2. add a selection of your favourite songs to the always_up/songs folder in mp3 format
+
+3. run make from terminal
+
+4. run ./start.sh from terminal
+
+5. browse to localhost:8000/playlist in chrome and it will stream your tunes in a random order

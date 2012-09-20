@@ -64,8 +64,10 @@ Plan
 3. Playlist continuously streams songs randomly from the file stream
 
 4. As multiple clients connect, they get the same playlist in synchronisation
+	+ chunk up the files more granular 
 
 5. Playlist server errors
+	+ convert to use OTP first
 	+ After a certain amount of time the playlist node stops working
 	+ system process restarts it in another process on same node
 	+ should be no/minimal disruption to users
