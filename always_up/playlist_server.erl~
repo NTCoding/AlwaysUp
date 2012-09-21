@@ -1,0 +1,106 @@
+-module(playlist_server).
+
+-export([start/0, join_stream/1]).
+
+
+start() ->
+	io:format("Starting playlist server~n"),
+	Pid = spawn(fun() -> loop([]) end),
+	register(playlist, Pid),
+	Playlist = playlist_generator:generate(3),
+	io:format("Streaming playlist: ~p~n", [Playlist]),
+	spawn(fun() -> start_streaming(Playlist) end).
+
+
+join_stream(Pid) ->
+	playlist ! {join, Pid},
+	ok.
+
+
+loop(Connections) ->
+	receive
+		{join, Pid} ->
+			io:format("Added client: ~p~n", [Pid]),
+			UpdatedConnections = update_connections(Connections, Pid),
+			loop(UpdatedConnections);
+
+		{Pid, connections} ->
+			Pid ! {playlist, connections, Connections},
+			loop(Connections)
+
+	after 5 ->
+		loop(Connections)
+	end,
+	loop(Connections).
+
+
+update_connections([], Pid) -> [Pid];
+
+update_connections(Connections, Pid) -> 
+	case lists:member(Pid, Connections) of
+		true -> Connections;
+			
+		false -> Connections ++ Pid
+	end.
+
+
+start_streaming(Playlist) ->
+	Connections = get_connections(),
+	if
+		length(Connections) =:= 0 ->
+			start_streaming(Playlist);
+
+		true ->
+			io:format("Streaming to: ~p~n", [Connections])
+	end,
+	Song = lists:nth(1, Playlist),
+	stream_song_to_connections(Song, Connections).
+
+
+get_connections() ->
+	playlist ! {self(), connections},
+	receive
+		{playlist, connections, Connections} -> []
+	end,
+	Connections.
+
+
+stream_song_to_connections(Song, Connections) ->
+	send_next_chunk_to_connections(Song, Connections, 0).
+
+send_next_chunk_to_connections(Song, Connections, SoFar) ->
+	{Chunk, SoFar1} = get_next_chunk(Song, 24576, SoFar),
+	lists:foreach(fun(C) -> send_chunk(C, Chunk) end, Connections),
+	send_next_chunk_to_connections(Song, Connections, SoFar1).
+
+
+get_next_chunk(Song, Size, []) ->
+	%%{ok, Chunk} = file:pread("songs/" ++ Song, 0, Size),
+	{ok, Chunk} = file:read_file("songs/" ++ Song),
+	{Chunk, Size};
+
+get_next_chunk(Song, Size, SoFar) ->
+	timer:sleep(100),
+	Offset = Size * SoFar,
+%%	{ok, Chunk} = file:pread("songs/" ++ Song, Offset, Size),
+	{ok, Chunk} = file:read_file("songs/" ++ Song),
+	{Chunk, SoFar + Size}.
+
+
+send_chunk(Connection, Chunk) ->
+	io:format("Sending chunk to: ~p~n", [Connection]),
+	Connection ! {playlist, chunk, Chunk}.
+	
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,42 @@
+-module(playlist_endpoint).
+
+-export([start/0]).
+
+
+start() ->
+	playlist_server:start(),
+	spawn(fun() -> 
+				listen_for_clients(),
+		  		timer:sleep(infinity)
+		  end).
+
+
+listen_for_clients() ->
+	{ok, Listen} = gen_tcp:listen(3000, [binary, {packet, 0}, {reuseaddr, true}, {active, true}]),
+	spawn(fun() -> wait_for_connection(Listen) end).
+
+
+wait_for_connection(Listen) ->
+	{ok, Socket} = gen_tcp:accept(Listen),
+	spawn(fun() -> wait_for_connection(Listen) end),
+	inet:setopts(Socket, [{packet, 0}, binary, {nodelay, true}, {active, true}]),
+	playlist_server:join_stream(self()),
+	stream_chunk(Socket).	
+
+
+stream_chunk(Socket) ->
+	receive
+		{playlist, chunk, Binary} ->
+				io:format("Sending chunk of size : ~p~n", [size(Binary)]),
+				case  gen_tcp:send(Socket, [Binary]) of
+
+					ok ->					
+						io:format("Chunk sent ok~n");
+
+					{error, _} ->
+						io:format("Error sending chunk: ~p~n", [_])
+	
+				end,
+				stream_chunk(Socket)
+	end.
+
