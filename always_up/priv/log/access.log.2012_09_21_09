@@ -1,0 +1,5 @@
+127.0.0.1 - - [21/Sep/2012:10:09:56 +0100] "GET / HTTP/1.1" 404 193 "" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/12.04 Chromium/18.0.1025.168 Chrome/18.0.1025.168 Safari/535.19"
+127.0.0.1 - - [21/Sep/2012:10:09:56 +0100] "GET /favicon.ico HTTP/1.1" 404 193 "" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/12.04 Chromium/18.0.1025.168 Chrome/18.0.1025.168 Safari/535.19"
+127.0.0.1 - - [21/Sep/2012:10:10:01 +0100] "GET /playlist HTTP/1.1" 200 14081887 "" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/12.04 Chromium/18.0.1025.168 Chrome/18.0.1025.168 Safari/535.19"
+127.0.0.1 - - [21/Sep/2012:10:10:01 +0100] "GET /favicon.ico HTTP/1.1" 404 193 "" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/12.04 Chromium/18.0.1025.168 Chrome/18.0.1025.168 Safari/535.19"
+127.0.0.1 - - [21/Sep/2012:10:10:01 +0100] "GET /playlist HTTP/1.1" 200 14081887 "http://localhost:8000/playlist" "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.19 (KHTML, like Gecko) Ubuntu/12.04 Chromium/18.0.1025.168 Chrome/18.0.1025.168 Safari/535.19"

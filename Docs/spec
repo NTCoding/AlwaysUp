@@ -58,37 +58,33 @@ Plan
 	+ Knock up a web application that just returns some binary from a single endpoint
 	+ Webmachine
 
-2. Create client that is able to stream the music
-	+ maybe look into the erlang book and use the streaming from that
+2. Playlist continuously streams songs randomly from the file stream
 
-3. Playlist continuously streams songs randomly from the file stream
+3. As multiple clients connect, they get the same playlist in synchronisation
+	
 
-4. As multiple clients connect, they get the same playlist in synchronisation
-	+ chunk up the files more granular 
-
-5. Playlist server errors
-	+ convert to use OTP first
+4. Playlist server errors
 	+ After a certain amount of time the playlist node stops working
 	+ system process restarts it in another process on same node
 	+ should be no/minimal disruption to users
 	+ 1 to 1 system process to worker process
 
-6. Hot code loading to fix bug
+5. Hot code loading to fix bug
 	+ Push a fix for the problem that causes the error above
 
-7. System process for web tier?
+6. System process for web tier?
 	+ this time have one system process for many processes
 
-8. Hot code loading for web tier
+7. Hot code loading for web tier
 	+ Add some new feature - http headers? ability to go backwards in the playlist? name of song?
 
-9. Distribute the system
+8. Distribute the system
 
-10. Use a riak back end
+9. Use a riak back end
 
-11. Performance?
+10. Performance?
 
-12. Scalability?
+11. Scalability?
 
 
 
