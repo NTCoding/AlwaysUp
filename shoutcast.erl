@@ -54,11 +54,22 @@ icy_response_headers() ->
 
 
 send_data_to(Socket, CurrentSongBytesSoFar) ->
-	{Chunk, Size} = get_chunk(CurrentSongBytesSoFar),
-	gen_tcp:send(Socket, Chunk),
-	Metadata = get_metadata(),
-	gen_tcp:send(Socket, Metadata),
-	send_data_to(Socket, CurrentSongBytesSoFar + Size + 1).
+	case get_chunk(CurrentSongBytesSoFar) of
+		{continue, Chunk, Size} ->
+			gen_tcp:send(Socket, Chunk),
+			Metadata = get_metadata(),
+			gen_tcp:send(Socket, Metadata),
+			send_data_to(Socket, CurrentSongBytesSoFar + Size + 1);
+
+		{boundary, Chunks, Size1} ->
+			gen_tcp:send(Socket, lists:nth(1, Chunks)),
+			gen_tcp:send(Socket, lists:nth(2, Chunks)),
+			Metadata = get_metadata(),
+			gen_tcp:send(Socket, Metadata),
+			Size2 = size(lists:nth(2, Chunks)),
+			send_data_to(Socket, Size2 + 1)
+	end.
+
 		
 
 get_chunk(BytesSoFar) ->
@@ -68,16 +79,18 @@ get_chunk(BytesSoFar) ->
 	if
 		EndByte > FileSize ->
 			io:format("restarting song~n"),
-			chunk_end_and_start_together(StartByte, FileSize);
+			{Chunks, Size} = chunk_end_and_start_together(StartByte, FileSize),
+			{boundary, Chunks, Size};
 
 		true ->
-			get_chunk(StartByte, ?CHUNKSIZE)
+			{Chunk, Size1} = get_chunk(StartByte, ?CHUNKSIZE),
+			{continue, Chunk, Size1}
 	end.
 
 
 get_chunk(Start, Length) ->
 	{ok, Stream} = file:open(?FILENAME, [read, binary, raw]),
-	io:format("Reading chunks ~p to ~p~n", [Start, Start + Length]),	
+	io:format("Sending bytes ~p to ~p~n", [Start, Start + Length]),	
 	{ok, Chunk} = file:pread(Stream, Start, Length),
 	file:close(Stream),
 	{Chunk, ?CHUNKSIZE}.
