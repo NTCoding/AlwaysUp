@@ -78,7 +78,7 @@ get_chunk(BytesSoFar) ->
 	FileSize = get_file_size(FileName),
 	if
 		EndByte > FileSize ->
-			io:format("Reached end of ~p~n", [FileName]),
+			io:format("restarting song~n"),
 			{Chunks, Size} = chunk_end_and_start_together(FileName, StartByte, FileSize - StartByte),
 			{boundary, Chunks, Size};
 
