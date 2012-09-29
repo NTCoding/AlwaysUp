@@ -1,9 +1,0 @@
-A shoutcast server written in Erlang.
-
-TCP sockets are my fucking web server!!!
-
-compile shoutcast.erl
-
-shoutcast.start().
-
-in a shoutcast player (winamp, VLC, etc) http://localhost:3000
