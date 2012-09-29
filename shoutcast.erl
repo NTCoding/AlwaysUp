@@ -7,8 +7,10 @@
 -include_lib("kernel/include/file.hrl").
 
 start() ->
+	playlist:start(),
 	spawn(fun() -> 
 					listen(),
+					io:format("Ready to stream - connect on port 3000~n"),
 					timer:sleep(infinity) 
 		  end).
 

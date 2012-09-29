@@ -4,6 +4,7 @@
 
 
 start() ->
+	io:format("Starting playilst~n"),
 	Pid = spawn(fun() -> loop(get_random_song()) end),
 	register(playlist, Pid).
 
@@ -36,6 +37,7 @@ loop(Song) ->
 	after 10 ->
 		loop(Song)
 	end.
+
 
 
 get_random_song() ->
