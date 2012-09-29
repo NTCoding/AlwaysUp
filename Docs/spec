@@ -33,7 +33,7 @@ Performance
 
 Scalability
 
-	+ TBA
+	+ Reach peak usage on a single node - show adding a new node doubles capacity?
 
 
 Demo
@@ -54,39 +54,42 @@ Demo
 Plan 
 -----
 
+**** PLAYLIST FEATURES ****
+
 1. Playlist service that repeatedly streams 1 song from file stream
 	+ Knock up a web application that just returns some binary from a single endpoint
-	+ Webmachine
-
+	
 2. Playlist continuously streams songs randomly from the file stream
 
 3. As multiple clients connect, they get the same playlist in synchronisation
 	
+4. Send the correct metadata to the client  [playlist name] - [current song]
 
-4. Playlist server errors
+
+**** HOT CODE LOADING ****
+
+1. Playlist server errors
 	+ After a certain amount of time the playlist node stops working
 	+ system process restarts it in another process on same node
 	+ should be no/minimal disruption to users
 	+ 1 to 1 system process to worker process
 
-5. Hot code loading to fix bug
+2. Hot code loading to fix bug
 	+ Push a fix for the problem that causes the error above
 
-6. System process for web tier?
-	+ this time have one system process for many processes
 
-7. Hot code loading for web tier
-	+ Add some new feature - http headers? ability to go backwards in the playlist? name of song?
+**** DISTRIBUTE THE SYSTEM ****
 
-8. Distribute the system
+9. Use a riak back end for high-availability songs
+	+ use opportunity to learn about riak in advance of contributing to the project
 
-9. Use a riak back end
+10. use SOA and add other services using message queues and buses
+	+ imaginery business components?
+	+ allow users to have accounts
+	+ marketing component uses data from clients
 
-10. Performance?
-
-11. Scalability?
-
-
+11. Maybe incorporate CQRS into some of these components?
+	
 
 
 
