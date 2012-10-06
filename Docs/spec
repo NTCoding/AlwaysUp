@@ -75,6 +75,7 @@ Plan
 	+ 1 to 1 system process to worker process
 
 1.5 Supervision strategy - supervisor will then start the required modules 
+	+ Use .app for a proper application start module
 
 2. Hot code loading to fix bug
 	+ Push a fix for the problem that causes the error above
