@@ -28,7 +28,7 @@ Process Monitoring:
 
 Performance
 
-	+ TBA
+	+ Monitoring / metrics
 
 
 Scalability
@@ -74,6 +74,8 @@ Plan
 	+ should be no/minimal disruption to users
 	+ 1 to 1 system process to worker process
 
+1.5 Supervision strategy - supervisor will then start the required modules 
+
 2. Hot code loading to fix bug
 	+ Push a fix for the problem that causes the error above
 
@@ -82,6 +84,7 @@ Plan
 
 9. Use a riak back end for high-availability songs
 	+ use opportunity to learn about riak in advance of contributing to the project
+	+ create a command-line app that will scan a file directory and pump the music into riak
 
 10. use SOA and add other services using message queues and buses
 	+ imaginery business components?
