@@ -24,11 +24,11 @@ init([]) ->
 			{one_for_one, 3, 10},
 			[{
 				tag1,
-				{shoutcast, start, []},
+				{shoutcast_server, start_link, []},
 				permanent,
 				10000,
 				worker,
-				[shoutcast]
+				[shoutcast_server]
 			 }]
 		  }
 	 }.

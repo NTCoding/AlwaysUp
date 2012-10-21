@@ -23,7 +23,7 @@ loop(Clients) ->
 
 		{join, Who, Socket} ->
 			Who ! {joined, ok},
-			io:format("New client joined the stream~n"),
+			%% io:format("New client joined the stream~n"),
 			Updated = lists:append(Clients, [Socket]),
 			loop(Updated)
 
