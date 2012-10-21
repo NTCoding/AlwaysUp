@@ -4,6 +4,5 @@ compile:
 	./rebar compile
 
 start:
-	erl -boot start_sasl
-	application:load(shoutcast).
-	application:start(shoutcast).
+	erl -s application load shoutcast -s application start shoutcast
+	

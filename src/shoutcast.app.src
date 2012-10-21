@@ -1,0 +1,14 @@
+{application, shoutcast,
+ [
+  {description, "Erlang shoutcast player"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { shoutcast_app, []}},
+  {env, []}
+ ]}.
+
+
