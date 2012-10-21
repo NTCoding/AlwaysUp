@@ -68,16 +68,16 @@ Plan
 
 **** HOT CODE LOADING ****
 
-1. Playlist server errors
+1. Supervision strategy - supervisor will then start the required modules 
+	+ Use .app for a proper application start module
+
+2. Playlist server errors
 	+ After a certain amount of time the playlist node stops working
 	+ system process restarts it in another process on same node
 	+ should be no/minimal disruption to users
 	+ 1 to 1 system process to worker process
 
-1.5 Supervision strategy - supervisor will then start the required modules 
-	+ Use .app for a proper application start module
-
-2. Hot code loading to fix bug
+3. Hot code loading to fix bug
 	+ Push a fix for the problem that causes the error above
 
 
