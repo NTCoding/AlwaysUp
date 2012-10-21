@@ -1,18 +1,12 @@
-A random-playlist shoutcast server written in Erlang.
+A random-playlist shoutcast server written in Erlang as an OTP application.
 
 To use this bad boy:
 
 1. Put some songs in the root folder (AlwaysUp)
 
-2. start an erlang shell (erl)
+2. run make in root folder
 
-3. Compile playlist and shoutcast - c(playlist). c(shoutcast).
-
-4. start playlist - playlist:start().
-
-5. start shoutcast - shoutcast:start().
-
-6. In vlc media player (or other shoutcast player) open network stream at: http://localhost:3000
+4. In vlc media player (or other shoutcast player) open network stream at: http://localhost:3000
 
 Keep an eye on the terminal for the output. It will notify you of:
 
