@@ -95,7 +95,11 @@ Plan
 11. Maybe incorporate CQRS into some of these components?
 	
 
+*** Other features
 
+ + Allow clients to request a song
+ + enable a song to be skipped
+ + get name of song from tag data
 
 
 

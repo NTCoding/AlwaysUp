@@ -4,6 +4,8 @@
 
 -define(CHUNKSIZE, 122880). %% Config setting
 
+-define(SONGPATH, "../songs/").
+
 -include_lib("kernel/include/file.hrl").
 
 play() ->
@@ -69,7 +71,7 @@ get_chunk(BytesSoFar) ->
 
 
 get_chunk(FileName, Start, Length) ->
-	{ok, Stream} = file:open(FileName, [read, binary, raw]),
+	{ok, Stream} = file:open(?SONGPATH ++ FileName, [read, binary, raw]),
 	io:format("Sending bytes ~p to ~p~n", [Start, Start + Length]),	
 	{ok, Chunk} = file:pread(Stream, Start, Length),
 	file:close(Stream),
@@ -77,7 +79,7 @@ get_chunk(FileName, Start, Length) ->
 
 
 get_file_size(FileName) ->
-	{ok, FileInfo} = file:read_file_info(FileName),
+	{ok, FileInfo} = file:read_file_info(?SONGPATH ++ FileName),
 	#file_info{size=Size} = FileInfo,
 	Size.
 

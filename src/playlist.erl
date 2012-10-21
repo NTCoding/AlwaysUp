@@ -41,7 +41,8 @@ loop(Song) ->
 
 
 get_random_song() ->
-	{ok, Filenames} = file:list_dir("../AlwaysUp"),
+	{ok, Filenames} = file:list_dir("../songs"),
+	io:format("Filenames: ~p~n", [Filenames]),
 	Mp3Files = lists:filter(fun(F) -> lists:suffix(".mp3", F) end, Filenames),
 	select_randomly(Mp3Files).
 
