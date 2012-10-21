@@ -97,7 +97,7 @@ read_chunk_from(FileName, Start, Length) ->
 
 
 get_metadata() ->
-	Data = ["StreamTitle='wickedsong';StreamUrl='http://localhost:3000'"],
+	Data = ["StreamTitle='" ++ playlist:current_song() ++"';StreamUrl='http://localhost:3000'"],
 	Binary = list_to_binary(Data),
 	NBlocks = ((size(Binary) - 1) div 16) + 1,
 	PaddingSize = NBlocks*16 - size(Binary),
