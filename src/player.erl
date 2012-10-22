@@ -4,7 +4,7 @@
 
 -define(CHUNKSIZE, 122880). %% Config setting
 
--define(SONGPATH, "../songs/").
+-define(SONGPATH, "songs/").
 
 -include_lib("kernel/include/file.hrl").
 
@@ -25,7 +25,6 @@ loop(Clients) ->
 
 		{join, Who, Socket} ->
 			Who ! {joined, ok},
-			%% io:format("New client joined the stream~n"),
 			Updated = lists:append(Clients, [Socket]),
 			loop(Updated)
 

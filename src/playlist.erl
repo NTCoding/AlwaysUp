@@ -4,7 +4,7 @@
 
 
 start() ->
-	io:format("Starting playilst~n"),
+	io:format("Starting playlist~n"),
 	Pid = spawn(fun() -> loop(get_random_song()) end),
 	register(playlist, Pid).
 
@@ -41,8 +41,7 @@ loop(Song) ->
 
 
 get_random_song() ->
-	{ok, Filenames} = file:list_dir("../songs"),
-	io:format("Filenames: ~p~n", [Filenames]),
+	{ok, Filenames} = file:list_dir("songs"),
 	Mp3Files = lists:filter(fun(F) -> lists:suffix(".mp3", F) end, Filenames),
 	select_randomly(Mp3Files).
 

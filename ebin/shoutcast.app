@@ -5,5 +5,5 @@
               {applications,[kernel,stdlib]},
               {mod,{shoutcast_app,[]}},
               {env,[]},
-              {modules,[player,playlist,shoutcast_app,shoutcast_server,
-                        shoutcast_supervisor]}]}.
+              {modules,[player,playlist,shoutcast,shoutcast_app,
+                        shoutcast_server,shoutcast_supervisor]}]}.
